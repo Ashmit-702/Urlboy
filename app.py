@@ -29,11 +29,15 @@ from flask_cors import CORS
 # ---------------------------------------------------------------------------
 SECRET_KEY = "url-shortener-super-secret-key-change-in-prod"
 DB_PATH = os.path.join(os.path.dirname(__file__), "shortener.db")
-BASE_URL = "http://localhost:5000"
+BASE_URL = "https://linksnip-r6cc.onrender.com"
 
 app = Flask(__name__, static_folder="public", static_url_path="")
 CORS(app)
 app.config["SECRET_KEY"] = SECRET_KEY
+
+@app.route("/")
+def home():
+    return send_from_directory("public","index.html")
 
 # ---------------------------------------------------------------------------
 # Database helpers
